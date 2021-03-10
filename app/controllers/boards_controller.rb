@@ -8,7 +8,8 @@ class BoardsController < ApplicationController
   end
 
   def create
-    Board.create(board_params) #createメソッドの引数に保存するパラメータを渡すことで保存できる
+    board = Board.create(board_params) #createメソッドの引数に保存するパラメータを渡すことで保存できる
+    redirect_to board ##boardオブジェクトにはデータを作成した時点でIDが付与されている
   end
 
   def show
@@ -23,6 +24,13 @@ class BoardsController < ApplicationController
     board = Board.find(params[:id]) ##updateアクションの場合はviewを作成せずインスタンス変数をviewに渡す必要がない
     board.update(board_params)
     redirect_to board #/boards/:idのパスにリダイレクトされる（更新処理の後に）
+  end
+
+  def destroy
+    board = Board.find(params[:id])
+    board.delete
+
+    redirect_to boards_path
   end
 
   private
