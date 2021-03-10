@@ -20,8 +20,8 @@
       <th><%= board.id %></th>
       <th><%= board.title %></th>
       <th><%= board.body %></th>
-      <th><%= board.created_at %></th>
-      <th><%= board.updated_at %></th>
+      <th><%= board.created_at.to_s(:default) %></th>
+      <th><%= board.updated_at.to_s(:default) %></th>
     </tr>
     <% end %>
   </tbody>
