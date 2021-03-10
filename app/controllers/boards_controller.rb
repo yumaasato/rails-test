@@ -15,6 +15,16 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id]) #idに対応するBoardオブジェクトを取得することができる
   end
 
+  def edit
+    @board = Board.find(params[:id])
+  end
+
+  def update
+    board = Board.find(params[:id]) ##updateアクションの場合はviewを作成せずインスタンス変数をviewに渡す必要がない
+    board.update(board_params)
+    redirect_to board #/boards/:idのパスにリダイレクトされる（更新処理の後に）
+  end
+
   private
 
   def board_params
