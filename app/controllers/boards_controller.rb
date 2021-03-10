@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   before_action :set_target_board, only: %i[show edit update destroy]  #各アクションが実行される前にset_target_boardが実行される
 
   def index
-    @boards = Board.all #boardモデルを使ってデータを取得する
+    @boards = Board.page(params[:page]) #boardモデルを使ってデータを取得する
   end
 
   def new
