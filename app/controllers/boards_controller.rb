@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  before_action :set_target_board, only: %i[show edit update destroy]  #各アクションが実行される前にset_target_boardが実行される
+
   def index
     @boards = Board.all #boardモデルを使ってデータを取得する
   end
@@ -13,22 +15,18 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id]) #idに対応するBoardオブジェクトを取得することができる
   end
 
   def edit
-    @board = Board.find(params[:id])
   end
 
   def update
-    board = Board.find(params[:id]) ##updateアクションの場合はviewを作成せずインスタンス変数をviewに渡す必要がない
-    board.update(board_params)
+    @board.update(board_params)
     redirect_to board #/boards/:idのパスにリダイレクトされる（更新処理の後に）
   end
 
   def destroy
-    board = Board.find(params[:id])
-    board.delete
+    @board.delete
 
     redirect_to boards_path
   end
@@ -37,5 +35,9 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:name, :title, :body)
+  end
+
+  def set_target_board
+    @board = Board.find(params[:id]) #idに対応するBoardオブジェクトを取得することができる
   end
 end
