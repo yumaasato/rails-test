@@ -9,7 +9,10 @@ class BoardsController < ApplicationController
 
   def create
     Board.create(board_params) #createメソッドの引数に保存するパラメータを渡すことで保存できる
-    binding.pry
+  end
+
+  def show
+    @board = Board.find(params[:id]) #idに対応するBoardオブジェクトを取得することができる
   end
 
   private
