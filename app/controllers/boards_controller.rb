@@ -6,13 +6,20 @@ class BoardsController < ApplicationController
   end
 
   def new
-    @board = Board.new
+    @board = Board.new(flash[:board])
   end
 
   def create
-    board = Board.create(board_params) #createメソッドの引数に保存するパラメータを渡すことで保存できる
-    flash[:notice] = "「#{board.title}」の掲示板を作成しました"
-    redirect_to board ##boardオブジェクトにはデータを作成した時点でIDが付与されている
+    board = Board.create(board_params) #createメソッドの引数に保存するパラメータを渡すことで保存できる、boardオブジェクトにはデータを作成した時点でIDが付与されている
+    if board.save
+      flash[:notice] = "「#{board.title}」の掲示板を作成しました"
+      redirect_to board
+    else
+      redirect_to new_board_path, flash: {
+        board: board,
+        error_messages: board.errors.full_messages
+      }
+    end
   end
 
   def show
@@ -28,7 +35,7 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.delete
-    redirect_to boards_path, flash: { notice: "「#{@board.title}」の掲示板が削除されました"}
+    redirect_to boards_path, flash: { notice: "「#{@board.title}」の掲示板が削除されました" }
   end
 
   private
