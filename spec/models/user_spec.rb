@@ -13,11 +13,8 @@
 #
 #  index_users_on_name  (name) UNIQUE
 #
+require 'rails_helper'
 
-one:
-  name: MyString
-  password_digest: MyString
-
-two:
-  name: MyString
-  password_digest: MyString
+RSpec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
