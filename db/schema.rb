@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_060016) do
+ActiveRecord::Schema.define(version: 20_210_312_060_016) do
 
-  create_table "board_tag_relations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "board_tag_relations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8",
+                                      force: :cascade do |t|
     t.integer "board_id"
     t.integer "tag_id"
     t.datetime "created_at", null: false

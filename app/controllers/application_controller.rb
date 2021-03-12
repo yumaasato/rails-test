@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    return unless session[:user_id] ##sessionにuser_idの情報がなければreturnする
+    return unless session[:user_id] # #sessionにuser_idの情報がなければreturnする
+
     @current_user = User.find_by(id: session[:user_id])
   end
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new(flash[:user]) ##else以下の処理に入ったとしてもフォームにuser名が消えずに残る
+    @user = User.new(flash[:user]) # #else以下の処理に入ったとしてもフォームにuser名が消えずに残る
   end
 
   def create
@@ -10,14 +10,13 @@ class UsersController < ApplicationController
       redirect_to mypage_path
     else
       redirect_to :back, flash: {
-        user: user, ##userオブジェクト
+        user: user, # #userオブジェクト
         error_messages: user.errors.full_messages
       }
     end
   end
 
-  def me
-  end
+  def me; end
 
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)
